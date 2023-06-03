@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 
 int is_prime(int n)
@@ -32,7 +31,13 @@ void factorize(int n)
     if (n < 0)
     {
         n = -n;  /* Convert negative number to positive */
-        printf("%d=-1*%d\n", n, n);
+        printf("%d=-1*%d\n", -n, n);
+        return;
+    }
+
+    if (is_prime(n))
+    {
+        printf("%d is a prime number\n", n);
         return;
     }
 
@@ -48,13 +53,9 @@ void factorize(int n)
 
     if (factor1 != -1 && factor2 != -1)
         printf("%d=%d*%d\n", n, factor1, factor2);
-    else if (is_prime(n))
-        printf("%d is a prime number\n", n);
     else
         printf("Unable to factorize %d\n", n);
 }
-
-
 
 void factorize_from_file(const char *filename)
 {
@@ -64,7 +65,7 @@ void factorize_from_file(const char *filename)
     file = fopen(filename, "r");
     if (file == NULL)
     {
-        printf("Error opening file\n");
+        printf("Error opening file '%s'\n", filename);
         return;
     }
 
